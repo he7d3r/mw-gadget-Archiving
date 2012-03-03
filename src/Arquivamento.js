@@ -1,7 +1,7 @@
 /*
  * Insere um link no topo da página para listar os tópicos da esplanada que já podem ser arquivados
  * @author: [[User:Helder.wiki]]
- * @traking: [[Special:GlobalUsage/User:Helder.wiki/Tools/Arquivamento.js]] ([[File:User:Helder.wiki/Tools/Arquivamento.js]])
+ * @tracking: [[Special:GlobalUsage/User:Helder.wiki/Tools/Arquivamento.js]] ([[File:User:Helder.wiki/Tools/Arquivamento.js]])
  */
 
 function checkDateOfLastEdit( data ) {
