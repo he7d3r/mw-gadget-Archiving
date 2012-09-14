@@ -4,8 +4,8 @@
  * @tracking: [[Special:GlobalUsage/User:Helder.wiki/Tools/Arquivamento.js]] ([[File:User:Helder.wiki/Tools/Arquivamento.js]])
  */
 /*jslint browser: true, white: true, devel: true, plusplus: true*/
-/*global jQuery, mediaWiki, jsMsg */
-( function ( $, mw ) {
+/*global mediaWiki, jQuery */
+( function ( mw, $ ) {
 'use strict';
 
 function checkDateOfLastEdit( data ) {
@@ -15,7 +15,7 @@ function checkDateOfLastEdit( data ) {
 		today = new Date(),
 		toArchive = [],
 		text = '';
-	if ( typeof data.error !== 'undefined' ) {
+	if ( data.error !== undefined ) {
 		text = 'Erro ao usar a API: ' + data.error.code + '. ' + data.error.info;
 	} else if ( data.query && data.query.pages && data.query.pageids ) {
 		pages = data.query.pages;
@@ -48,8 +48,10 @@ function checkDateOfLastEdit( data ) {
 	} else {
 		text = 'Houve um erro inesperado ao usar a API.';
 	}
-	jsMsg( text );
-	$( '#mw-js-message' ).find( 'table' ).tablesorter();
+	$('#mw-content-text')
+		.prepend( text )
+		.find( 'table' ).tablesorter();
+	mw.notify( 'Pronto!' );
 }
 
 function getListOfTopicsAndCheckDateOfLastEdit(){
@@ -60,7 +62,7 @@ function getListOfTopicsAndCheckDateOfLastEdit(){
 		topics.push( decodeURIComponent( $(this).attr('href').replace( urlPrefix, '' ) ) );
 	});
 	if ( topics.length === 0 ) {
-		jsMsg( 'Não foi encontrado nenhum tópico nesta página' );
+		mw.notify( 'Não foi encontrado nenhum tópico nesta página' );
 		return;
 	}
 
@@ -78,7 +80,7 @@ function getListOfTopicsAndCheckDateOfLastEdit(){
 	})
 	.done( checkDateOfLastEdit )
 	.fail( function() {
-		jsMsg( 'Houve um erro ao tentar usar a API para acessar a página atual.' );
+		mw.notify( 'Houve um erro ao tentar usar a API para acessar a página atual.' );
 	});
 }
 
@@ -95,4 +97,4 @@ if ($.inArray(mw.config.get('wgAction'), ['view', 'submit', 'purge']) !== -1) {
 	} );
 }
 
-}( jQuery, mediaWiki ) );
+}( mediaWiki, jQuery ) );
