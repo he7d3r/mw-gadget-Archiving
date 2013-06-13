@@ -55,7 +55,7 @@ function checkDateOfLastEdit( data ) {
 }
 
 function getListOfTopicsAndCheckDateOfLastEdit(){
-	var	urlPrefix = mw.config.get( 'wgServer' ) + mw.config.get( 'wgArticlePath' ).replace('$1', ''),
+	var urlPrefix = mw.config.get( 'wgServer' ) + mw.config.get( 'wgArticlePath' ).replace('$1', ''),
 		topics = [];
 
 	$('h2+div p').find('a:first').each(function(){
@@ -65,23 +65,17 @@ function getListOfTopicsAndCheckDateOfLastEdit(){
 		mw.notify( 'Não foi encontrado nenhum tópico nesta página' );
 		return;
 	}
-
-	$.ajax({
-		url: mw.util.wikiScript( 'api' ),
-		dataType: 'json',
-		data: {
-			'format': 'json',
-			'action': 'query',
-			'titles': topics.join('|'),
-			'prop': 'revisions',
-			'rvprop': 'timestamp',
-			'indexpageids': '1'
-		}
+	( new mw.Api() ).get({
+		action: 'query',
+		titles: topics.join( '|' ),
+		prop: 'revisions',
+		rvprop: 'timestamp',
+		indexpageids: '1'
 	})
 	.done( checkDateOfLastEdit )
 	.fail( function() {
 		mw.notify( 'Houve um erro ao tentar usar a API para acessar a página atual.' );
-	});
+	} );
 }
 
 if ($.inArray(mw.config.get('wgAction'), ['view', 'submit', 'purge']) !== -1) {
@@ -93,7 +87,7 @@ if ($.inArray(mw.config.get('wgAction'), ['view', 'submit', 'purge']) !== -1) {
 		'Listar tópicos que possivelmente já podem ser arquivados'
 	) ).click( function (e) {
 		e.preventDefault();
-		mw.loader.using( 'jquery.tablesorter', getListOfTopicsAndCheckDateOfLastEdit );
+		mw.loader.using( ['mediawiki.api', 'jquery.tablesorter'], getListOfTopicsAndCheckDateOfLastEdit );
 	} );
 }
 
