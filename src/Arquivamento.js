@@ -27,7 +27,7 @@ function checkDateOfLastEdit( data ) {
 				daysSinceLastComment = Math.floor( ( today.getTime() - topicDate.getTime() )/milisecondsInOneDay );
 				if ( daysSinceLastComment > max ) {
 					toArchive.push(
-						'<tr><td><a href="' + mw.util.wikiGetlink( page.title ) + '?diff=0">' +
+						'<tr><td><a href="' + mw.util.getUrl( page.title ) + '?diff=0">' +
 						page.title.substr( mw.config.get('wgPageName').length + 1 ) + '</a></td><td>' + daysSinceLastComment + '</td></tr>'
 					);
 				}
