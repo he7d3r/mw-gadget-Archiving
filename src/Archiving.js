@@ -2,7 +2,6 @@
  * Insere um link no topo da página para listar os tópicos da esplanada que já podem ser arquivados
  * @author: Helder (https://github.com/he7d3r)
  * @license: CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0/>
- * @tracking: [[Special:GlobalUsage/User:Helder.wiki/Tools/Arquivamento.js]] ([[File:User:Helder.wiki/Tools/Arquivamento.js]])
  */
 /*jslint browser: true, white: true, devel: true, plusplus: true*/
 /*global mediaWiki, jQuery */
