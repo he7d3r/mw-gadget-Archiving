@@ -3,8 +3,6 @@
  * @author: Helder (https://github.com/he7d3r)
  * @license: CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0/>
  */
-/*jslint browser: true, white: true, devel: true, plusplus: true*/
-/*global mediaWiki, jQuery */
 ( function ( mw, $ ) {
 'use strict';
 
